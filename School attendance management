@@ -1,0 +1,58 @@
+class AttendanceManager:
+    def __init__(self):
+        self.students = {}
+
+    def add_student(self, name):
+        if name not in self.students:
+            self.students[name] = []
+            print(f"Student {name} added.")
+        else:
+            print(f"Student {name} is already in the list.")
+
+    def mark_attendance(self, name, status):
+        if name in self.students:
+            self.students[name].append(status)
+            print(f"Marked {status} for {name}.")
+        else:
+            print(f"Student {name} not found. Please add the student first.")
+
+    def view_attendance(self, name):
+        if name in self.students:
+            print(f"Attendance record for {name}: {self.students[name]}")
+        else:
+            print(f"Student {name} not found.")
+
+    def view_all_attendance(self):
+        for name, attendance in self.students.items():
+            print(f"{name}: {attendance}")
+
+def main():
+    manager = AttendanceManager()
+    while True:
+        print("\nAttendance Management System")
+        print("1. Add Student")
+        print("2. Mark Attendance")
+        print("3. View Attendance")
+        print("4. View All Attendance")
+        print("5. Exit")
+        choice = input("Enter your choice: ")
+        if choice == '1':
+            name = input("Enter student name: ")
+            manager.add_student(name)
+        elif choice == '2':
+            name = input("Enter student name: ")
+            status = input("Enter attendance status (Present/Absent): ")
+            manager.mark_attendance(name, status)
+        elif choice == '3':
+            name = input("Enter student name: ")
+            manager.view_attendance(name)
+        elif choice == '4':
+            manager.view_all_attendance()
+        elif choice == '5':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
